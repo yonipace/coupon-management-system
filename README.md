@@ -12,9 +12,25 @@ The system is accessible by three types of clients:
 
 * Java
 * Spring boot
+<<<<<<< HEAD
 * MySQL
 
 ## getting started
 
 The system is currently accessible by downloading the sorce files and launching the project on a local machine.
 When running, the system rest controller is accessible using the swagger-ui at http://localhost:8080/swagger-ui.html.
+=======
+* PostgresSQL
+* React.js 
+* Material UI
+
+
+## getting started
+
+Go to the project website at: https://coupon-management-system.herokuapp.com/
+Sign up as a customer or a company (no need to put real details) to get access.
+Or click on the 'get demo' button to get a demo as an admin.  
+
+### Frontend
+The frontend code could be found here: https://github.com/yonipace/coupon-system-ui
+>>>>>>> branch 'master' of https://github.com/yonipace/coupon-management-system.git
