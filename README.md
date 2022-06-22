@@ -16,7 +16,7 @@ The system is accessible by three types of clients:
 * Auth: JWT
 
 
-## getting started
+## Getting started
 
 Go to the project website at: https://coupon-management-system.herokuapp.com/
 Sign up as a customer or a company (no need to put real details) to get access.
