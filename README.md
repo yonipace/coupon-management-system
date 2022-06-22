@@ -24,7 +24,7 @@ Or click on the 'get demo' button to get a demo as an admin.
 
 
 
-### Frontend 
+## Frontend 
 
 The frontend code could be found here: https://github.com/yonipace/coupon-system-ui
 
