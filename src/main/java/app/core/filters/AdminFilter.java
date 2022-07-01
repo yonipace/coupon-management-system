@@ -15,14 +15,12 @@ import org.springframework.http.HttpStatus;
 import app.core.login.LoginManagerInterface.ClientType;
 import app.core.utilities.JwtUtil;
 
-public class ClientFilter implements Filter {
+public class AdminFilter implements Filter {
 
 	private JwtUtil jwtUtil;
-	private ClientType client;
 
-	public ClientFilter(JwtUtil jwtUtil, ClientType client) {
+	public AdminFilter(JwtUtil jwtUtil) {
 		this.jwtUtil = jwtUtil;
-		this.client = client;
 	}
 
 	@Override
@@ -35,23 +33,15 @@ public class ClientFilter implements Filter {
 
 		try {
 
-			response.addHeader("Access-Control-Allow-Origin", "*");
-			response.addHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST,DELETE");
-			response.setHeader("Access-Control-Allow-Headers", "Content-Type,my-token,myHeaders,token");
-
-			if (request.getMethod().equals("OPTIONS")) {
-				response.setStatus(HttpServletResponse.SC_ACCEPTED);
-				return;
-			}
-
-			if (jwtUtil.extractClientType(token).equals(this.client)) {
+			if (jwtUtil.extractClientType(token).equals(ClientType.ADMIN)) {
 				chain.doFilter(request, response);
-				return;
+			} else {
+				// if not logged in - block the request
+				response.sendError(HttpStatus.UNAUTHORIZED.value(), "you are not logged in");
 			}
-			// if not logged in - block the request
-			response.sendError(HttpStatus.UNAUTHORIZED.value(), "you are not logged in");
 
 		} catch (Exception e) {
+
 			response.sendError(HttpStatus.UNAUTHORIZED.value(), e.getMessage());
 
 		}

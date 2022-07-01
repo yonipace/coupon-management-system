@@ -4,34 +4,37 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import app.core.login.LoginManagerInterface.ClientType;
 import app.core.utilities.JwtUtil;
 
 @Component
 public class ClientFilterComponents {
 
-	private FilterRegistrationBean<ClientFilter> filterRegistrationBean;
-
 	@Bean
-	public FilterRegistrationBean<ClientFilter> adminFilter(JwtUtil jwtUtil) {
+	public FilterRegistrationBean<AdminFilter> adminFilter(JwtUtil jwtUtil) {
 
-		this.filterRegistrationBean = new FilterRegistrationBean<>(new ClientFilter(jwtUtil, ClientType.ADMIN));
+		FilterRegistrationBean<AdminFilter> filterRegistrationBean;
+
+		filterRegistrationBean = new FilterRegistrationBean<AdminFilter>(new AdminFilter(jwtUtil));
 		filterRegistrationBean.addUrlPatterns("/admin/*");
 		return filterRegistrationBean;
 	}
 
 	@Bean
-	public FilterRegistrationBean<ClientFilter> companyFilter(JwtUtil jwtUtil) {
+	public FilterRegistrationBean<CompanyFilter> companyFilter(JwtUtil jwtUtil) {
 
-		this.filterRegistrationBean = new FilterRegistrationBean<>(new ClientFilter(jwtUtil, ClientType.COMPANY));
+		FilterRegistrationBean<CompanyFilter> filterRegistrationBean;
+
+		filterRegistrationBean = new FilterRegistrationBean<>(new CompanyFilter(jwtUtil));
 		filterRegistrationBean.addUrlPatterns("/company/*");
 		return filterRegistrationBean;
 	}
 
 	@Bean
-	public FilterRegistrationBean<ClientFilter> customerFilter(JwtUtil jwtUtil) {
+	public FilterRegistrationBean<CustomerFilter> customerFilter(JwtUtil jwtUtil) {
 
-		this.filterRegistrationBean = new FilterRegistrationBean<>(new ClientFilter(jwtUtil, ClientType.CUSTOMER));
+		FilterRegistrationBean<CustomerFilter> filterRegistrationBean;
+
+		filterRegistrationBean = new FilterRegistrationBean<>(new CustomerFilter(jwtUtil));
 		filterRegistrationBean.addUrlPatterns("/customer/*");
 		return filterRegistrationBean;
 	}
